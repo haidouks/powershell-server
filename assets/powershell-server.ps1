@@ -17,7 +17,6 @@ while ($true) {
         break 
     }
     else {
-        $req = $request
         $requestvars = ([String]$request.Url).split("/");
         Write-Verbose -Message "Received request: $($request.Url)"
         Write-Verbose -Message "Request Details:`n $($request | fl * -force | Out-String -Stream)"
@@ -27,7 +26,7 @@ while ($true) {
             subname = $requestvars[4].split("?")[0]
             exists = $false
         }
-        Write-Verbose -Message "Looking for application $($application.Name)"
+        Write-Verbose -Message "Looking for application $($application.Name)/$($application.subname)"
         Write-Verbose -Message "Current application list:$folders"
         foreach($folder in $folders)
         {
@@ -74,6 +73,8 @@ while ($true) {
        $output = $response.OutputStream
        $output.Write($buffer, 0, $buffer.length)
        $output.Close()
+       #Free memory
+       Clear-variable -Name "message","output","body","result","response","request","context","parameters"
    }    
 }
 $listener.Stop()
