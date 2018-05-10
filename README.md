@@ -1,4 +1,4 @@
-# dockerized powershell-server
+# Dockerized Powershell-Server
 
 ->Build Container
 docker build . -t powershell-server
