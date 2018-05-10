@@ -6,7 +6,8 @@ docker build . -t powershell-server
 ->Run Container
 docker run -d -p 8080:8080 powershell-server
 
-Samples 
+# Sample URLs 
+
 HTML:
 http://localhost:8080/app-html/html5?name=cansin
 
