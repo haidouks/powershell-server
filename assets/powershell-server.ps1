@@ -21,11 +21,10 @@ while ($true) {
         Write-Verbose -Message "Received request: $($request.Url)"
         Write-Verbose -Message "Request Details:`n $($request | fl * -force | Out-String -Stream)"
         $folders = (Get-ChildItem -Path $PSScriptRoot -Directory | Select-Object BaseName).BaseName
-        $application = @{
-            name = $requestvars[3]
-            subname = $requestvars[4].split("?")[0]
-            exists = $false
-        }
+        $application = @{}
+        $application.exists = $false
+        $application.name = $requestvars[3]
+        $application.subname = $requestvars[4].split("?")[0]
         Write-Verbose -Message "Looking for application $($application.Name)/$($application.subname)"
         Write-Verbose -Message "Current application list:$folders"
         foreach($folder in $folders)
