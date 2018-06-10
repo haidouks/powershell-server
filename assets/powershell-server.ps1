@@ -4,8 +4,6 @@ $port="8080"
 $listener.Prefixes.Add("http://+:$port/") 
 $listener.Start()
 write-host "Listening On Port: $port"
-$req = $null
- 
 while ($true) {
     $context = $listener.GetContext()
     $requestvars = ([String]$context.Request.Url).split("/");
@@ -28,8 +26,7 @@ while ($true) {
             body = $body
         }
             Write-Verbose -Message "Executing $PSScriptRoot\$($application.name)\$($application.subname)\index.ps1"
-            $result = & "$PSScriptRoot\$($requestvars[3])\$($requestvars[4].split("?")[0])\index.ps1" @parameters 
-            $message = $result.output | Out-String
+            $message = $(& "$PSScriptRoot\$($requestvars[3])\$($requestvars[4].split("?")[0])\index.ps1" @parameters).output | Out-String
             $context.Response.ContentType = $result.contentType;
         }
     catch {
