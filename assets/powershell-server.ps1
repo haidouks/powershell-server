@@ -1,4 +1,4 @@
-$VerbosePreference = "SilentlyContinue"
+$VerbosePreference = "SilentyContinue"
 $listener = New-Object System.Net.HttpListener
 $port="8080"
 $listener.Prefixes.Add("http://+:$port/") 
@@ -29,7 +29,7 @@ while ($true) {
         }
     try {
             Write-Verbose -Message "Executing $PSScriptRoot\$($application.name)\$($application.subname)\index.ps1"
-            $result = & "$PSScriptRoot\$($requestvars[3])\$($requestvars[4])\index.ps1" @parameters 
+            $result = & "$PSScriptRoot\$($requestvars[3])\$($requestvars[4].split("?")[0])\index.ps1" @parameters 
             $message = $result.output | Out-String
             $response.ContentType = $result.contentType;
         }
