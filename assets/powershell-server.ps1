@@ -36,9 +36,8 @@ while ($true) {
     finally { 
             [byte[]]$buffer = [System.Text.Encoding]::UTF8.GetBytes($message)
             $context.Response.ContentLength64 = $buffer.length
-            $output = $context.Response.OutputStream
-            $output.Write($buffer, 0, $buffer.length)
-            $output.Close()
+            $context.Response.OutputStream.Write($buffer, 0, $buffer.length)
+            $context.Response.OutputStream.Close()
             $context.Response.Close()
             #Free memory
         }
