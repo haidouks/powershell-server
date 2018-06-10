@@ -1,4 +1,4 @@
-$VerbosePreference = "SilentyContinue"
+$VerbosePreference = "SilentlyContinue"
 $listener = New-Object System.Net.HttpListener
 $port="8080"
 $listener.Prefixes.Add("http://+:$port/") 
