@@ -30,7 +30,7 @@ while ($true) {
             $context.Response.ContentType = $result.contentType;
         }
     catch {
-            $message += "<br/>Details<br/>$_.Exception";
+            $message += "<br/>Details<br/>$($_ | fl * )";
             $context.Response.ContentType = 'text/html' ;
         }
     finally { 
